@@ -93,7 +93,7 @@ switch(method)
         alpha = 1;
         K     = 10;%选取最近邻数
         [pc, l] = eigs(cov(XX(1:num_training,:)),bit);
-        S=getSimilarMatrix(XX',K);
+        S=getSimilarMatrix(XX(1:num_training,:)',K);
         XX = XX * pc;
         [Y,R]=DLLE2(XX(1:num_training,:),S,b_itr,s_itr,alpha);
         XX = XX*R;
@@ -107,7 +107,7 @@ switch(method)
         alpha = 1;
         K     = 10;%选取最近邻数
         [pc, l] = eigs(cov(XX(1:num_training,:)),bit);
-        S=getAnchorW(XX,XX(randperm(size(XX,2),300),:),2);
+        S=getAnchorW(XX(1:num_training,:), XX(randperm(size(XX,2),300),:),2);
         XX = XX * pc;
         [Y,R]=DLLE2(XX(1:num_training,:),S,b_itr,s_itr,alpha);
         XX = XX*R;
